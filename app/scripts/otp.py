@@ -14,5 +14,7 @@ async def generate_otp(username: str) -> str:
 
 async def verify_otp(username: str, otp: str) -> bool:
     users_otp = redis_client.get(username)
-    totp = pyotp.TOTP(users_otp, interval=300)
-    return totp.verify(otp)
+    if users_otp:
+        totp = pyotp.TOTP(users_otp, interval=300)
+        return totp.verify(otp)
+    return False
