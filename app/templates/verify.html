@@ -1,0 +1,6 @@
+<h1>Verify OTP</h1>
+  <form action="/api/v1/tfa/verify-otp/{{ username }}" method="post">
+      <label for="otp">One-Time Password:</label>
+      <input type="text" name="otp" required><br>
+      <input type="submit" value="Verify">
+  </form>

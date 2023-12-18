@@ -6,6 +6,7 @@ from fastapi import FastAPI
 from motor.motor_asyncio import AsyncIOMotorClient
 from redis import asyncio as aioredis
 from starlette.middleware.cors import CORSMiddleware
+from starlette.templating import Jinja2Templates
 
 from app.config.config import DefaultServerSettings, RedisSettings, MONGO_URL
 from app.endpoints import all_routes
@@ -31,7 +32,7 @@ def get_app(settings: DefaultServerSettings) -> FastAPI:
     application = FastAPI(
         title="Kursovaya (Shaburov Shalomeev)",
         description=description,
-        docs_url="/",
+        docs_url="/docs",
         openapi_url="/openapi",
         version="1.0.0",
     )

@@ -23,24 +23,18 @@ services:
     networks:
       - basic_network
 
-
-#
-#  tests:
-#    container_name: K_Tests
-#    build:
-#      context: .
-#      dockerfile: Dockerfile.test
-#    volumes:
-#      - .:/app
-#    command: [ "pytest", "-v" ,"/app/tests/test_classification.py" ]
-#    tty: true
-#    depends_on:
-#      - back
-#    env_file:
-#      - app/config/.env-docker-back
-#    networks:
-#      - basic_network
-
+  celery:
+    container_name: K_Celery
+    build:
+      context: app
+    command: [ "/app/celery.sh", "celery" ]
+    depends_on:
+      - redis-cache
+      - back
+    env_file:
+      - app/config/.env-docker-back
+    networks:
+      - basic_network
 
 
   redis-cache:
